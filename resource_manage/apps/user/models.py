@@ -28,7 +28,6 @@ class AccountModel(AbstractBaseUser, PermissionsMixin):
         },
     )
     password = models.CharField(_('password'), null=True, blank=True, max_length=128)
-    name = models.CharField(max_length=256, null=True, blank=True, verbose_name="用户真实姓名")
 
     is_staff = models.BooleanField(
         _('staff status'),
