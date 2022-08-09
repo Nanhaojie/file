@@ -65,6 +65,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'drf_yasg',
+    'django_filters',
     'file',
     'user',
 ]
@@ -279,3 +281,9 @@ FILE_NAME_DATE_TIME_FORMAT = "%Y%m%d%H%M%S%f"
 PC_EXP_SECOND = 8 * 60 * 60 + 30 * 60  # 8个半小时
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+# 文件路径
+FILE_PATH = '/home/nhj/upload_files/'
+
+# 文件服务器地址
+FS_SERVER = 'http://0.0.0.0:8090/fs/v1/file/'
