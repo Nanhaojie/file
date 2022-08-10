@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}文件管理 - 设置{% endblock %}
+
+{% block custome_css %}
+    <link rel="stylesheet" href="{% static 'files/css/upload.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <p class="content-note1">公用电脑设置<span class="content-note2"> (多个值用逗号隔开)</span></p>
+        <p class="content-note2">*如需使用公用电脑下载文件，请先将该公用电脑IP填上</p>
+        <div style="clear:both"></div>
+        <form class="form-table" action="{% url 'files:public_ip' %}" method="post">
+            <div class="form-list">
+                <span>公用电脑IP</span><input type="text" name="host_ip" value="{{ public_ip.host_ip }}"/>
+            </div>
+            {% if msg %}
+                <div class="error">{{ msg }}</div>
+            {% endif %}
+            <div style="clear:both"></div>
+            <div class="form-list">
+                <input class="form-button" type="submit" value="保存"/>
+            </div>
+            <div class="form-list">
+                 <button class="form-button" type="button" onclick="btn_cancel()">取消</button>
+            </div>
+            {% csrf_token %}
+        </form>
+    </div>
+{% endblock %}
+
+{% block custome_js %}
+    <script>
+        function btn_cancel() {
+            location.href = "{% url 'index' %}";
+        }
+    </script>
+{% endblock %}
