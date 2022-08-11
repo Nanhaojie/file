@@ -11,14 +11,11 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 11/08/2022 10:21:22
+ Date: 11/08/2022 16:05:36
 */
-create database if not exists resource_manage default character set UTF8mb4 collate utf8mb4_unicode_ci;
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
-
-use resource_manage;
 
 -- ----------------------------
 -- Table structure for auth_group
@@ -255,12 +252,7 @@ CREATE TABLE `files_file`  (
   `second_check` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `isapprove` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of files_file
--- ----------------------------
-INSERT INTO `files_file` VALUES (1, '20220810141913643', '飞书20220524-101112.png', '/home/nhj/files/ADMIN/2022/8/10', 'ADMIN', '2022-08-10 14:19:13.643954', '0', '0', '0');
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for files_publicip
@@ -286,13 +278,8 @@ CREATE TABLE `users_useroperatelog`  (
   `filename` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `fileno` varchar(18) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
--- ----------------------------
--- Records of users_useroperatelog
--- ----------------------------
-INSERT INTO `users_useroperatelog` VALUES (1, 'ADMIN', '上传', '2022-08-10 14:19:13.663952', '123', '', '飞书20220524-101112.png', '20220810141913643');
-INSERT INTO `users_useroperatelog` VALUES (2, 'ADMIN', '下载', '2022-08-10 16:09:00.228466', '123', '', '飞书20220524-101112.png', '20220810141913643');
 
 -- ----------------------------
 -- Table structure for users_userprofile
