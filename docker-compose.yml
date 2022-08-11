@@ -1,0 +1,33 @@
+version: "3.3"
+services:
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    container_name: mysql
+    restart: always
+    ports:
+      - "3306"
+    volumes:
+      - ./sql_init/resource_manage.sql:/docker-entrypoint-initdb.d/resource_manage.sql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+  backend:
+    user: "${UID}:${GID}"
+    build:
+      context: .
+      dockerfile: dockerfiles/backend
+    depends_on:
+      - db
+    ports:
+      - "${BACKEND_PORT}:8000"
+    volumes:
+      - ./src/backend:/opt/backend
+    environment:
+      - PYTHONPATH=/opt/backend
+      - DJANGO_SETTINGS_MODULE=api.settings
+      - FRONTEND_PORT=${FRONTEND_PORT}
+      - POSTGRES_DB=docker
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=docker-root
+
