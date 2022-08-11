@@ -29,11 +29,11 @@
                     <th>序号</th>
                     <th>文件编号</th>
                     <th>文件名称</th>
-                    <th>上传用户</th>
+<!--                    <th>上传用户</th>-->
                     <th>上传时间</th>
-                    <th>初审</th>
-                    <th>二审</th>
-                    <th>终审</th>
+<!--                    <th>初审</th>-->
+<!--                    <th>二审</th>-->
+<!--                    <th>终审</th>-->
                     <th>下载</th>
                 </tr>
             </thead>
@@ -43,19 +43,19 @@
                         <td>{{ forloop.counter|add:start }}</td>
                         <td>{{ content.fileno }}</td>
                         <td>{{ content.filename }}</td>
-                        <td>{{ content.owner }}</td>
+<!--                        <td>{{ content.owner }}</td>-->
                         <td>{{ content.add_time|date:"Y-m-d H:i:s" }}</td>
-                        {% if request.user.role == '3' and request.user.sub_role == '1' %}
-                            <td><a href="{% url 'files:firstcheck' content.id %}">{{ content.get_first_check_display }}</a></td>
-                        {% else %}
-                            <td>{{ content.get_first_check_display }}</td>
-                        {% endif %}
-                        {% if request.user.role == '3' and request.user.sub_role == '2' %}
-                            <td><a href="{% url 'files:secondcheck' content.id %}">{{ content.get_second_check_display }}</a></td>
-                        {% else %}
-                            <td>{{ content.get_second_check_display }}</td>
-                        {% endif %}
-                        <td>{{ content.get_isapprove_display }}</td>
+<!--                        {% if request.user.role == '3' and request.user.sub_role == '1' %}-->
+<!--                            <td><a href="{% url 'files:firstcheck' content.id %}">{{ content.get_first_check_display }}</a></td>-->
+<!--                        {% else %}-->
+<!--                            <td>{{ content.get_first_check_display }}</td>-->
+<!--                        {% endif %}-->
+<!--                        {% if request.user.role == '3' and request.user.sub_role == '2' %}-->
+<!--                            <td><a href="{% url 'files:secondcheck' content.id %}">{{ content.get_second_check_display }}</a></td>-->
+<!--                        {% else %}-->
+<!--                            <td>{{ content.get_second_check_display }}</td>-->
+<!--                        {% endif %}-->
+<!--                        <td>{{ content.get_isapprove_display }}</td>-->
                         <td><a href="{% url 'files:download' content.id %}">Download</a></td>
                     </tr>
                 {% endfor %}
