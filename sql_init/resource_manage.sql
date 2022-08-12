@@ -13,9 +13,12 @@
 
  Date: 11/08/2022 16:05:36
 */
+create database if not exists resource_manage default character set UTF8mb4 collate utf8mb4_unicode_ci;
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+use resource_manage;
 
 -- ----------------------------
 -- Table structure for auth_group
