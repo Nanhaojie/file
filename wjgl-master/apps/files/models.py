@@ -13,6 +13,7 @@ class File(models.Model):
     first_check = models.CharField(max_length=1, choices=(('0', '未审批'), ('1', '已审批')), verbose_name='初审', default='0')
     second_check = models.CharField(max_length=1, choices=(('0', '未审批'), ('1', '已审批')), verbose_name='二审', default='0')
     isapprove = models.CharField(max_length=1, choices=(('0', '未审批'), ('1', '已审批'), ('2', '已驳回')), verbose_name='终审', default='0')
+    remark = models.CharField(max_length=256, null=True, blank=True, verbose_name='文件备注')
 
     class Meta:
         verbose_name = '文件'

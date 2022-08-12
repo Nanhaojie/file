@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import FileUploadView, FileDownloadView, FileExportView, PublicIpView, FileFirstCheckView
+from .views import FileUploadView, FileDownloadView, FileExportView, PublicIpView, FileFirstCheckView, RemarkView
 from .views import FileSecondCheckView, FileApproveView, FileRejectView, FileApproveListView, FileApproveLogView
 
 
@@ -15,4 +15,6 @@ urlpatterns = [
     path('approvelog/', FileApproveLogView.as_view(), name='approvelog'),
     path('export/', FileExportView.as_view(), name='export'),
     path('public_ip/', PublicIpView.as_view(), name='public_ip'),
+
+    path('remark/', RemarkView.as_view())
 ]

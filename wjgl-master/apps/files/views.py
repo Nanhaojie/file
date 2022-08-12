@@ -10,7 +10,8 @@ from django.http import FileResponse
 from django.utils.http import urlquote
 from django.db.models import Q
 from pure_pagination import Paginator, PageNotAnInteger
-
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from .models import File, PublicIp, ApproveLog
 from users.models import UserOperateLog
 from wjgl.settings import per_page, root_path
@@ -324,3 +325,15 @@ class PublicIpView(LoginRequiredMixin, View):
         public_ip.host_ip = request.POST.get('host_ip')
         public_ip.save()
         return HttpResponseRedirect((reverse('index')))
+
+
+# 公用电脑ip
+class RemarkView(APIView):
+    def post(self, request):
+        remark = request.POST.get('content')
+        id = request.POST.get('id')
+        data = {'code': 200, 'content': remark}
+        file_obj = File.objects.filter(id=id)
+        if file_obj:
+            file_obj.update(remark=remark)
+        return Response(data)

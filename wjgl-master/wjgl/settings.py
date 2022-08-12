@@ -42,6 +42,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'wjgl-master.utils.csrf_middleware.NotUseCsrfTokenMiddlewareMixin'
 ]
 
 ROOT_URLCONF = 'wjgl.urls'
