@@ -42,7 +42,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'wjgl-master.utils.csrf_middleware.NotUseCsrfTokenMiddlewareMixin'
+    #'wjgl-master.utils.csrf_middleware.NotUseCsrfTokenMiddlewareMixin'
 ]
 
 ROOT_URLCONF = 'wjgl.urls'
@@ -69,10 +69,10 @@ WSGI_APPLICATION = 'wjgl.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': '172.16.1.10',  # 数据库主机
+        'HOST': '192.168.17.164',  # 数据库主机
         'PORT': '3306',  # 数据库端口
         'USER': 'root',  # 数据库用户名
-        'PASSWORD': 'root12300.',  # 数据库用户密码
+        'PASSWORD': '123456',  # 数据库用户密码
         'NAME': 'resource_manage',  # 数据库名字
         'default-character-set': 'utf8',
         'OPTIONS': {'charset': 'utf8mb4'},

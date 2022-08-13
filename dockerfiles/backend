@@ -2,7 +2,7 @@ FROM python:3.6
 
 WORKDIR /opt/wjgl-master
 
-COPY ./wjgl-master /opt/wjgl-master
+COPY ./ /opt/
 RUN pip3 install -r /opt/wjgl-master/requirements.txt -i https://mirrors.aliyun.com/pypi/simple
 
 EXPOSE 8000

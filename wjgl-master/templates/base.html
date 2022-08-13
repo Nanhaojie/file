@@ -28,17 +28,8 @@
     {#侧边栏#}
     <div class="sidebar" id="sidebar">
         <ul>
-            <li {% ifequal request.path '/' %}class="active-li"{% endifequal %}><a href="{% url 'index' %}"><i class="fa fa-table" aria-hidden="true"></i><span>文件列表</span></a></li>
-            {#仅超级管理员和系统管理员有以下四个界面#}
-            <!--{% if request.user.role == '2' or request.user.is_superuser == 1 %}
-                <li {% ifequal request.path|slice:18 '/files/approvelist' %}class="active-li"{% endifequal %}><a href="{% url 'files:approvelist' %}"><i class="fa fa-list" aria-hidden="true"></i><span class="">审批列表</span></a></li>
-                <li {% ifequal request.path|slice:11 '/users/list' %}class="active-li"{% endifequal %}><a href="{% url 'users:list' %}"><i class="fa fa-user" aria-hidden="true"></i><span class="">人员管理</span></a></li>
-                <li {% ifequal request.path|slice:17 '/files/public_ip' %}class="active-li"{% endifequal %}><a href="{% url 'files:public_ip' %}"><i class="fa fa-cog" aria-hidden="true"></i><span class="">设置</span></a></li>
-            {% endif %}
-            {% if request.user.role == '2' or request.user.role == '3' or request.user.is_superuser == 1 %}
-                <li {% ifequal request.path|slice:17 '/files/approvelog' %}class="active-li"{% endifequal %}><a href="{% url 'files:approvelog' %}"><i class="fa fa-bars" aria-hidden="true"></i><span class="">审批记录</span></a></li>
-            {% endif %}
-            <li {% ifequal request.path|slice:18 '/users/operate_log' %}class="active-li"{% endifequal %}><a href="{% url 'users:operate_log' %}"><i class="fa fa-book" aria-hidden="true"></i><span class="">操作日志</span></a></li>-->
+            <li><a href="{% url 'index' %}"><i class="fa fa-table" aria-hidden="true"></i><span>文件列表</span></a></li>
+            <li {% ifequal request.path|slice:11 '/users/list' %}class="active-li"{% endifequal %}><a href="{% url 'users:list' %}"><i class="fa fa-user" aria-hidden="true"></i><span class="">用户管理</span></a></li>
         </ul>
     </div>
 

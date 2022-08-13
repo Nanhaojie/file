@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 11/08/2022 16:05:36
+ Date: 12/08/2022 18:00:02
 */
 create database if not exists resource_manage default character set UTF8mb4 collate utf8mb4_unicode_ci;
 
@@ -160,7 +160,7 @@ CREATE TABLE `django_migrations`  (
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `applied` datetime(6) NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 43 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of django_migrations
@@ -205,6 +205,8 @@ INSERT INTO `django_migrations` VALUES (37, 'users', '0009_auto_20191105_1537', 
 INSERT INTO `django_migrations` VALUES (38, 'users', '0010_auto_20191106_0923', '2022-08-09 17:58:11.415232');
 INSERT INTO `django_migrations` VALUES (39, 'users', '0011_auto_20191106_1118', '2022-08-09 17:58:11.545119');
 INSERT INTO `django_migrations` VALUES (40, 'users', '0012_auto_20191106_1649', '2022-08-09 17:58:11.645255');
+INSERT INTO `django_migrations` VALUES (41, 'files', '0012_auto_20220812_1507', '2022-08-12 15:07:58.818130');
+INSERT INTO `django_migrations` VALUES (42, 'files', '0013_auto_20220812_1759', '2022-08-12 17:59:20.578830');
 
 -- ----------------------------
 -- Table structure for django_session
@@ -222,23 +224,11 @@ CREATE TABLE `django_session`  (
 -- Records of django_session
 -- ----------------------------
 INSERT INTO `django_session` VALUES ('dnt0etfb0zpgjyvc3idlqigmvgav97hv', 'ZTE5ODljMDQ1NTVmYjE4MzMyZjJlZGUyNzJhY2RmMGUyNDI5OTE2Nzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidXNlcnMudmlld3MuQ3VzdG9tZUJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI2NThkOWM5YmEyNmQ3YjgyYmFjN2ViOTQwZjlhOTY0MTcyNjY5M2U5In0=', '2022-08-25 10:00:58.602677');
+INSERT INTO `django_session` VALUES ('e7nsf5hnur15yvw6lieae4v4dpe5ubp0', 'ZTE5ODljMDQ1NTVmYjE4MzMyZjJlZGUyNzJhY2RmMGUyNDI5OTE2Nzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidXNlcnMudmlld3MuQ3VzdG9tZUJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI2NThkOWM5YmEyNmQ3YjgyYmFjN2ViOTQwZjlhOTY0MTcyNjY5M2U5In0=', '2022-08-26 17:01:23.490877');
 INSERT INTO `django_session` VALUES ('r2b75gqk5sbqik2o4s650v59qwmhi6ox', 'ZTE5ODljMDQ1NTVmYjE4MzMyZjJlZGUyNzJhY2RmMGUyNDI5OTE2Nzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidXNlcnMudmlld3MuQ3VzdG9tZUJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI2NThkOWM5YmEyNmQ3YjgyYmFjN2ViOTQwZjlhOTY0MTcyNjY5M2U5In0=', '2022-08-24 14:30:42.936809');
+INSERT INTO `django_session` VALUES ('s90fif13x97zi1pranu7y92pwee6u4r1', 'ZTE5ODljMDQ1NTVmYjE4MzMyZjJlZGUyNzJhY2RmMGUyNDI5OTE2Nzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidXNlcnMudmlld3MuQ3VzdG9tZUJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI2NThkOWM5YmEyNmQ3YjgyYmFjN2ViOTQwZjlhOTY0MTcyNjY5M2U5In0=', '2022-08-26 10:29:09.861014');
 INSERT INTO `django_session` VALUES ('tjhyicifff6g3s02rhn9x1namxmtcipp', 'ZTE5ODljMDQ1NTVmYjE4MzMyZjJlZGUyNzJhY2RmMGUyNDI5OTE2Nzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidXNlcnMudmlld3MuQ3VzdG9tZUJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI2NThkOWM5YmEyNmQ3YjgyYmFjN2ViOTQwZjlhOTY0MTcyNjY5M2U5In0=', '2022-08-24 18:09:09.217701');
-
--- ----------------------------
--- Table structure for files_approvelog
--- ----------------------------
-DROP TABLE IF EXISTS `files_approvelog`;
-CREATE TABLE `files_approvelog`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fileno` varchar(18) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `filename` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `owner` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `add_time` datetime(6) NULL,
-  `approve_time` datetime(6) NULL,
-  `isapprove` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+INSERT INTO `django_session` VALUES ('zskeru8wpw4du44unxqe5vo2jr1lle4g', 'ZTE5ODljMDQ1NTVmYjE4MzMyZjJlZGUyNzJhY2RmMGUyNDI5OTE2Nzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidXNlcnMudmlld3MuQ3VzdG9tZUJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI2NThkOWM5YmEyNmQ3YjgyYmFjN2ViOTQwZjlhOTY0MTcyNjY5M2U5In0=', '2022-08-26 08:29:21.052334');
 
 -- ----------------------------
 -- Table structure for files_file
@@ -254,18 +244,9 @@ CREATE TABLE `files_file`  (
   `first_check` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `second_check` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `isapprove` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `remark` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for files_publicip
--- ----------------------------
-DROP TABLE IF EXISTS `files_publicip`;
-CREATE TABLE `files_publicip`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `host_ip` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for users_useroperatelog
@@ -281,8 +262,7 @@ CREATE TABLE `users_useroperatelog`  (
   `filename` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `fileno` varchar(18) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for users_userprofile
@@ -312,7 +292,7 @@ CREATE TABLE `users_userprofile`  (
 -- ----------------------------
 -- Records of users_userprofile
 -- ----------------------------
-INSERT INTO `users_userprofile` VALUES (1, 'pbkdf2_sha256$150000$MDw6GUXMo5EY$m/UojDG5VHmUC9hOQzNKheIJ+A9IxEjBoVJP3s1QZto=', '2022-08-11 10:00:58.572745', 'admin', '', '', '', 0, 1, '2022-08-10 14:16:34.137289', '研发部', 0, '2', '123', '0', '2022-08-10 14:16:34.137334');
+INSERT INTO `users_userprofile` VALUES (1, 'pbkdf2_sha256$150000$MDw6GUXMo5EY$m/UojDG5VHmUC9hOQzNKheIJ+A9IxEjBoVJP3s1QZto=', '2022-08-12 17:01:23.483872', 'admin', '', '', '', 0, 1, '2022-08-10 14:16:34.137289', '研发部', 0, '2', '123', '0', '2022-08-10 14:16:34.137334');
 
 -- ----------------------------
 -- Table structure for users_userprofile_groups
