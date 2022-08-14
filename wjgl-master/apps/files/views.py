@@ -89,6 +89,9 @@ class FileDownloadView(LoginRequiredMixin, View):
         filepath = file.filepath
         if not os.path.isfile(os.path.join(filepath, filename)):
             return render(request, 'files/file_download_error.html', {'msg': '文件可能已经被删除，请联系管理员~'})
+        file_pay = file.first_check
+        if file_pay == '0' or file_pay == 0:
+            return render(request, 'files/file_download_error.html', {'msg': '文件未付费，请先付费~'})
         download_file = open(os.path.join(filepath, filename), 'rb')
         response = FileResponse(download_file)
         response['Content-Type'] = 'application/octet-stream'
@@ -138,3 +141,21 @@ class RemarkView(APIView):
         if file_obj:
             file_obj.update(remark=remark)
         return Response(data)
+
+
+# 是否付费
+class FilePayView(LoginRequiredMixin, View):
+    def get(self, request, file_id):
+        file = File.objects.get(id=file_id)
+        if file.first_check == '0':
+            file.first_check = '1'
+        file.save()
+        return HttpResponseRedirect((reverse('index')))
+
+
+# 删除
+class FileDeleteView(LoginRequiredMixin, View):
+    def get(self, request, file_id):
+        file = File.objects.get(id=file_id)
+        file.delete()
+        return HttpResponseRedirect((reverse('index')))

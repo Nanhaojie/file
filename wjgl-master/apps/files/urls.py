@@ -1,7 +1,6 @@
 from django.urls import path
 
-from .views import FileUploadView, FileDownloadView, FileExportView,   RemarkView
-
+from .views import FileUploadView, FileDownloadView, FileExportView, RemarkView, FilePayView, FileDeleteView
 
 urlpatterns = [
     # 文件上传
@@ -11,5 +10,9 @@ urlpatterns = [
     # 文件导出
     path('export/', FileExportView.as_view(), name='export'),
     # 文件备注
-    path('remark/', RemarkView.as_view())
+    path('remark/', RemarkView.as_view()),
+    # 付费
+    path('pay/<int:file_id>/', FilePayView.as_view(), name='pay'),
+    # 删除
+    path('delete/<int:file_id>/', FileDeleteView.as_view(), name='delete'),
 ]
