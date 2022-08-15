@@ -159,3 +159,33 @@ class FileDeleteView(LoginRequiredMixin, View):
         file = File.objects.get(id=file_id)
         file.delete()
         return HttpResponseRedirect((reverse('index')))
+
+
+# 发布站
+class WordPresslistView(LoginRequiredMixin, View):
+    def get(self, request):
+        search = request.GET.get('search')
+        if search:
+            search = search.strip()
+            if request.user.role == '3' or request.user.is_superuser == 1:
+                files = File.objects.filter(Q(fileno__icontains=search) | Q(filename__icontains=search)
+                                            | Q(owner__icontains=search)).order_by('-add_time')
+            else:
+                files = File.objects.filter(Q(fileno__icontains=search) | Q(filename__icontains=search),
+                                            owner=request.user.username).order_by('-add_time')
+        else:
+            if request.user.role == '3' or request.user.is_superuser == 1:
+                files = File.objects.all().order_by('-add_time')
+            else:
+                files = File.objects.filter(owner=request.user.username).order_by('-add_time')
+
+        # 分页功能实现
+        try:
+            page = request.GET.get('page', 1)
+        except PageNotAnInteger:
+            page = 1
+        p = Paginator(files, per_page=per_page, request=request)
+        p_contents = p.page(page)
+        start = (int(page) - 1) * per_page  # 避免分页后每行数据序号从1开始
+
+        return render(request, 'files/wordpress.html', {'p_contents': p_contents, 'start': start, 'search': search})
