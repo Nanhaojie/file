@@ -121,15 +121,12 @@ class UserAddView(LoginRequiredMixin, View):
         if userinfo_form.is_valid():
             userno = request.POST.get('userno').strip()
             username = request.POST.get('username').strip()
-            department = request.POST.get('department').strip()
             role = request.POST.get('role')
-            sub_role = request.POST.get('sub_role')
             user = UserProfile.objects.filter(username=username)
             if user:
                 return render(request, 'users/user_add.html', {'msg': '用户 '+username+' 已存在！'})
             else:
-                new_user = UserProfile(userno=userno, username=username, password=make_password(pwd),
-                                       department=department, role=role, sub_role=sub_role)
+                new_user = UserProfile(userno=userno, username=username, password=make_password(pwd), role=role)
                 new_user.save()
                 return HttpResponseRedirect((reverse('users:list')))
         else:

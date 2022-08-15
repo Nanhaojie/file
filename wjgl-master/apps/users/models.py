@@ -6,10 +6,9 @@ from django.contrib.auth.models import AbstractUser
 
 # 定义用户模型，添加额外的字段
 class UserProfile(AbstractUser):
-    userno = models.CharField(max_length=15, verbose_name='工号')
+    userno = models.CharField(max_length=15, verbose_name='账号')
     department = models.CharField(max_length=15, verbose_name='部门', blank=True)
-    role = models.CharField(max_length=1, choices=(('3', '监察稽核员'), ('2', '系统管理员'),
-                                                   ('1', '普通员工'), ('0', '离职员工')),
+    role = models.CharField(max_length=1, choices=(('2', '系统管理员'), ('1', '发布站访客')),
                             verbose_name='用户角色', default='1')
     sub_role = models.CharField(max_length=1, choices=(('2', '二审员'), ('1', '初审员'), ('0', '')),
                                 verbose_name='子角色', default='0')
