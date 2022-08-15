@@ -61,8 +61,8 @@ class FileUploadView(LoginRequiredMixin, View):
         day = str(datetime.datetime.now().day)
         username = request.user.username.upper()
         upload_path = os.path.join(root_path, username, year, month, day)
-        if os.path.isfile(os.path.join(upload_path, my_file.name)):
-            return render(request, 'files/file_upload.html', {'msg': my_file.name + '已存在'})
+        # if os.path.isfile(os.path.join(upload_path, my_file.name)):
+        #     return render(request, 'files/file_upload.html', {'msg': my_file.name + '已存在'})
         if not os.path.exists(upload_path):
             os.makedirs(upload_path)
         with open(os.path.join(upload_path, my_file.name), 'wb+') as f:
