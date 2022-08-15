@@ -112,7 +112,7 @@ class UserListView(LoginRequiredMixin, View):
 
 
 # 用户添加
-class UserAddView(LoginRequiredMixin, View):
+class UserAddView(View):
     def get(self, request):
         return render(request, 'users/user_add.html')
 
@@ -128,7 +128,8 @@ class UserAddView(LoginRequiredMixin, View):
             else:
                 new_user = UserProfile(userno=userno, username=username, password=make_password(pwd), role=role)
                 new_user.save()
-                return HttpResponseRedirect((reverse('users:list')))
+                # return HttpResponseRedirect((reverse('users:list')))
+                return render(request, 'users/user_add.html', {'msg': '用户注册成功'})
         else:
             return render(request, 'users/user_add.html', {'msg': '输入错误！', 'userinfo_form': userinfo_form})
 

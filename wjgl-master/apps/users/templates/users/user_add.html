@@ -30,18 +30,7 @@
             <div class="form-list">
                 <input class="form-button" type="submit"/>
             </div>
-            <div class="form-list">
-                 <button class="form-button" type="button" onclick="btn_cancel()">取消</button>
-            </div>
-<!--            {% csrf_token %}-->
+            {% csrf_token %}
         </form>
     </div>
-{% endblock %}
-
-{% block custome_js %}
-    <script>
-        function btn_cancel() {
-            location.href = "{% url 'users:list' %}";
-        }
-    </script>
 {% endblock %}
