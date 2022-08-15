@@ -89,9 +89,10 @@ class FileDownloadView(LoginRequiredMixin, View):
         filepath = file.filepath
         if not os.path.isfile(os.path.join(filepath, filename)):
             return render(request, 'files/file_download_error.html', {'msg': '文件可能已经被删除，请联系管理员~'})
-        file_pay = file.first_check
-        if file_pay == '0' or file_pay == 0:
-            return render(request, 'files/file_download_error.html', {'msg': '文件未付费，请先付费~'})
+        # 文件管理下载不需要收费
+        # file_pay = file.first_check
+        # if file_pay == '0' or file_pay == 0:
+        #     return render(request, 'files/file_download_error.html', {'msg': '文件未付费，请先付费~'})
         download_file = open(os.path.join(filepath, filename), 'rb')
         response = FileResponse(download_file)
         response['Content-Type'] = 'application/octet-stream'
@@ -147,8 +148,26 @@ class RemarkView(APIView):
 class FilePayView(LoginRequiredMixin, View):
     def get(self, request, file_id):
         file = File.objects.get(id=file_id)
-        if file.first_check == '0':
-            file.first_check = '1'
+        if file.isapprove == '0':
+            if file.first_check == '0':
+                file.first_check = '1'
+        else:
+            file.first_check = '2'
+        file.save()
+        return HttpResponseRedirect((reverse('index')))
+
+
+# 是否需要付费付费
+class FileNeedPayView(LoginRequiredMixin, View):
+    def get(self, request, file_id):
+        file = File.objects.get(id=file_id)
+        if file.isapprove == '0':
+            file.isapprove = '1'
+            file.first_check = '2'
+        else:
+            file.isapprove = '0'
+            file.first_check = '0'
+
         file.save()
         return HttpResponseRedirect((reverse('index')))
 
@@ -189,3 +208,23 @@ class WordPresslistView(LoginRequiredMixin, View):
         start = (int(page) - 1) * per_page  # 避免分页后每行数据序号从1开始
 
         return render(request, 'files/wordpress.html', {'p_contents': p_contents, 'start': start, 'search': search})
+
+
+# 文件下载
+class FileWordPressDownloadView(LoginRequiredMixin, View):
+    def get(self, request, file_id):
+        file = File.objects.get(id=file_id)
+        if (request.user.username.upper() != file.owner.upper() and request.user.role != '3' and request.user.is_superuser != 1):
+            return HttpResponse(status=404)
+        filename = file.filename
+        filepath = file.filepath
+        if not os.path.isfile(os.path.join(filepath, filename)):
+            return render(request, 'files/file_download_error.html', {'msg': '文件可能已经被删除，请联系管理员~'})
+        file_pay = file.first_check
+        if file_pay == '0' or file_pay == 0:
+            return render(request, 'files/file_download_error.html', {'msg': '文件未付费，请先付费~'})
+        download_file = open(os.path.join(filepath, filename), 'rb')
+        response = FileResponse(download_file)
+        response['Content-Type'] = 'application/octet-stream'
+        response['Content-Disposition'] = 'attachment; filename=' + urlquote(filename)
+        return response

@@ -31,6 +31,7 @@
                     <th>文件名称</th>
 <!--                    <th>上传用户</th>-->
                     <th>上传时间</th>
+                    <th>是否需要付费</th>
                     <th>付费状态</th>
                     <th>删除</th>
                     <th>备注</th>
@@ -40,14 +41,15 @@
             <tbody>
                 {% for content in p_contents.object_list %}
                     <tr>
-                        <td>{{ forloop.counter|add:start }}</td>
+                        <td height=100px>{{ forloop.counter|add:start }}</td>
 <!--                        <td>{{ content.fileno }}</td>-->
-                        <td>{{ content.filename }}</td>
+                        <td height=100px>{{ content.filename }}</td>
 <!--                        <td>{{ content.owner }}</td>-->
-                        <td>{{ content.add_time|date:"Y-m-d H:i:s" }}</td>
-                        <td><a href="{% url 'files:pay' content.id %}">{{ content.get_first_check_display }}</a></td>
-                        <td><a href="{% url 'files:delete' content.id %}">{{ content.get_second_check_display }}</a></td>
-                        <td id="{{ content.id }}">
+                        <td height=100px>{{ content.add_time|date:"Y-m-d H:i:s" }}</td>
+                        <td height=100px><a href="{% url 'files:needpay' content.id %}">{{ content.get_isapprove_display }}</a></td>
+                        <td height=100px><a href="{% url 'files:pay' content.id %}">{{ content.get_first_check_display }}</a></td>
+                        <td height=100px><a href="{% url 'files:delete' content.id %}">{{ content.get_second_check_display }}</a></td>
+                        <td height=100px id="{{ content.id }}">
                             <div style="height: 100%;" onclick="handleEditRemark('{{content.id}}')">
                                 {% if content.remark %}
                                     {{ content.remark }}
@@ -56,7 +58,7 @@
                                 {% endif %}
                             </div>
                         </td>
-                        <td><a href="{% url 'files:download' content.id %}">Download</a></td>
+                        <td height=100px><a href="{% url 'files:download' content.id %}">Download</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
