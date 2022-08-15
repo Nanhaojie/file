@@ -193,10 +193,7 @@ class WordPresslistView(LoginRequiredMixin, View):
                 files = File.objects.filter(Q(fileno__icontains=search) | Q(filename__icontains=search),
                                             owner=request.user.username).order_by('-add_time')
         else:
-            if request.user.role == '3' or request.user.is_superuser == 1:
-                files = File.objects.all().order_by('-add_time')
-            else:
-                files = File.objects.filter(owner=request.user.username).order_by('-add_time')
+            files = File.objects.all().order_by('-add_time')
 
         # 分页功能实现
         try:
@@ -214,15 +211,13 @@ class WordPresslistView(LoginRequiredMixin, View):
 class FileWordPressDownloadView(LoginRequiredMixin, View):
     def get(self, request, file_id):
         file = File.objects.get(id=file_id)
-        if (request.user.username.upper() != file.owner.upper() and request.user.role != '3' and request.user.is_superuser != 1):
-            return HttpResponse(status=404)
         filename = file.filename
         filepath = file.filepath
         if not os.path.isfile(os.path.join(filepath, filename)):
-            return render(request, 'files/file_download_error.html', {'msg': '文件可能已经被删除，请联系管理员~'})
+            return render(request, 'files/word_press_file_download_error.html', {'msg': '文件可能已经被删除，请联系管理员~'})
         file_pay = file.first_check
         if file_pay == '0' or file_pay == 0:
-            return render(request, 'files/file_download_error.html', {'msg': '文件未付费，请先付费~'})
+            return render(request, 'files/word_press_file_download_error.html', {'msg': '文件未付费，请先付费~'})
         download_file = open(os.path.join(filepath, filename), 'rb')
         response = FileResponse(download_file)
         response['Content-Type'] = 'application/octet-stream'
