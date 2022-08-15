@@ -18,6 +18,9 @@
                 <div class="error">{{ msg }}</div>
             {% endif %}
             <input class="login-input login-submit" type="submit">
+            <a href="http://127.0.0.1:8001/users/add/">
+                <button>注册</button>
+            </a>
             {% csrf_token %}
         </form>
     </div>

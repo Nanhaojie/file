@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'files/css/list.css' %}">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    {% block custome_css %}{% endblock %}
+</head>
+
+<body>
+    {#导航栏#}
+    <div class="nav">
+        <div class="nav-left">发布站</div>
+        <div class="nav-right">
+            <div class="nav-right-name">{{ request.user.username }}<i class="fa fa-caret-down" aria-hidden="true"></i>
+                <dl class="nav-right-logout">
+                    <dd><a href="{% url 'users:pwd_modify' %}">修改密码</a></dd>
+                    <dd><a href="{% url 'users:logout' %}">退&nbsp&nbsp&nbsp&nbsp出</a></dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    {#侧边栏#}
+    <div class="sidebar" id="sidebar">
+        <ul>
+            <li {% ifequal request.path|slice:18 '/files/wordpresslist' %}class="active-li"{% endifequal %}><a href="{% url 'files:wordpresslist' %}"><i class="fa fa-list" aria-hidden="true"></i><span class="">发布站</span></a></li>
+        </ul>
+    </div>
+
+    {#内容栏#}
+    <div class="wrapper">
+        {% block content %}{% endblock %}
+    </div>
+
+    {#通用js代码#}
+    <script>
+        {#调整侧边框的高度，下面的48是导航栏的高度#}
+        var sidebar = document.getElementById("sidebar");
+        var content_height = document.body.scrollHeight>window.innerHeight?document.body.scrollHeight-48:window.innerHeight-48;
+        sidebar.style.height = content_height+'px';
+    </script>
+
+    {#不同页面自定义js代码#}
+    {% block custome_js %}{% endblock %}
+</body>
+
+</html>

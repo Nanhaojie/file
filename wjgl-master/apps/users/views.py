@@ -45,6 +45,8 @@ class UserLoginView(View):
                 login(request, user)
                 if request.user.role == '0' and request.user.is_superuser != 1:
                     return render(request, 'users/login.html', {'msg': '该账号已锁，请联系管理员'})
+                if request.user.role == '1':
+                    return render(request, 'files/wordpress.html')
                 return HttpResponseRedirect(reverse('index'))
             else:
                 return render(request, 'users/login.html', {'msg': '账号或密码错误'})
@@ -112,8 +114,6 @@ class UserListView(LoginRequiredMixin, View):
 # 用户添加
 class UserAddView(LoginRequiredMixin, View):
     def get(self, request):
-        if request.user.role != '2' and request.user.is_superuser != 1:
-            return HttpResponse(status=404)
         return render(request, 'users/user_add.html')
 
     def post(self, request):
