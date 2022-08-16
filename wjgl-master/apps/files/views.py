@@ -154,7 +154,7 @@ class FilePayView(LoginRequiredMixin, View):
         else:
             file.first_check = '2'
         file.save()
-        return HttpResponseRedirect((reverse('index')))
+        return HttpResponseRedirect((reverse('files:wordpresslist')))
 
 
 # 是否需要付费付费

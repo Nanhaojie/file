@@ -30,7 +30,7 @@
         <ul>
             {% if request.user.role == '2' or request.user.is_superuser == 1 %}
             <li><a href="{% url 'index' %}"><i class="fa fa-table" aria-hidden="true"></i><span>文件列表</span></a></li>
-            <li {% ifequal request.path|slice:11 '/users/list' %}class="active-li"{% endifequal %}><a href="{% url 'users:list' %}"><i class="fa fa-user" aria-hidden="true"></i><span class="">用户管理</span></a></li>
+<!--            <li {% ifequal request.path|slice:11 '/users/list' %}class="active-li"{% endifequal %}><a href="{% url 'users:list' %}"><i class="fa fa-user" aria-hidden="true"></i><span class="">用户管理</span></a></li>-->
             {% endif %}
             <li {% ifequal request.path|slice:18 '/files/wordpresslist' %}class="active-li"{% endifequal %}><a href="{% url 'files:wordpresslist' %}"><i class="fa fa-list" aria-hidden="true"></i><span class="">发布站</span></a></li>
             {% if request.user.role == '1' or request.user.role == '2' %}
