@@ -46,7 +46,7 @@ class UserLoginView(View):
                 if request.user.role == '0' and request.user.is_superuser != 1:
                     return render(request, 'users/login.html', {'msg': '该账号已锁，请联系管理员'})
                 if request.user.role == '1':
-                    return render(request, 'files/wordpress.html')
+                    return HttpResponseRedirect((reverse('files:wordpresslist')))
                 return HttpResponseRedirect(reverse('index'))
             else:
                 return render(request, 'users/login.html', {'msg': '账号或密码错误'})
@@ -123,8 +123,9 @@ class UserAddView(View):
             username = request.POST.get('username').strip()
             role = request.POST.get('role')
             user = UserProfile.objects.filter(username=username)
-            if user:
-                return render(request, 'users/user_add.html', {'msg': '用户 '+username+' 已存在！'})
+            userno_have = UserProfile.objects.filter(userno=userno)
+            if userno_have:
+                return render(request, 'users/user_add.html', {'msg': '账号 '+userno+' 已存在！'})
             else:
                 new_user = UserProfile(userno=userno, username=username, password=make_password(pwd), role=role)
                 new_user.save()
