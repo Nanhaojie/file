@@ -1,7 +1,7 @@
 from django.urls import path
 
 from .views import FileUploadView, FileDownloadView, FileExportView, RemarkView, FilePayView, FileDeleteView, \
-    WordPresslistView, FileNeedPayView, FileWordPressDownloadView
+    WordPresslistView, FileNeedPayView, FileWordPressDownloadView, FileWordPressPayView
 
 urlpatterns = [
     # 文件上传
@@ -23,4 +23,6 @@ urlpatterns = [
     path('wordpresslist/', WordPresslistView.as_view(), name='wordpresslist'),
     # 发布站文件下载
     path('wordpressdownload/<int:file_id>/', FileWordPressDownloadView.as_view(), name='wordpressdownload'),
+    # 付费
+    path('wordpresspay/<int:file_id>/', FileWordPressPayView.as_view(), name='wordpresspay'),
 ]

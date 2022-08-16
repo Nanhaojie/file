@@ -154,6 +154,19 @@ class FilePayView(LoginRequiredMixin, View):
         else:
             file.first_check = '2'
         file.save()
+        return HttpResponseRedirect((reverse('index')))
+
+
+# 是否付费
+class FileWordPressPayView(LoginRequiredMixin, View):
+    def get(self, request, file_id):
+        file = File.objects.get(id=file_id)
+        if file.isapprove == '0':
+            if file.first_check == '0':
+                file.first_check = '1'
+        else:
+            file.first_check = '2'
+        file.save()
         return HttpResponseRedirect((reverse('files:wordpresslist')))
 
 
